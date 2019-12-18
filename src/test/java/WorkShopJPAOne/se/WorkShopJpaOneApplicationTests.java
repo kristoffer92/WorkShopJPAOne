@@ -51,7 +51,7 @@ class WorkShopJpaOneApplicationTests {
 	@Test
 	public void makeEqualsHashCodeTest(){
 		AppUser appUserTwo = new AppUser(user.getId(),user.getFirstName(),user.getLastName(),user.getEmail());
-		assertEquals(appUserTwo, user);
+		assertTrue(user.equals(appUserTwo));
 		assertEquals(appUserTwo.hashCode(), user.hashCode());
 	}
 
