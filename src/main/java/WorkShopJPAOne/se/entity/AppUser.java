@@ -3,10 +3,10 @@ package WorkShopJPAOne.se.entity;
 import java.util.Objects;
 
 public class AppUser {
-    int id;
-    String firstName;
-    String lastName;
-    String email;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String email;
 
     public AppUser(int id, String firstName, String lastName, String email) {
         this.id = id;
