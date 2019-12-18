@@ -55,7 +55,8 @@ public class Product {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(id, name, price);
     }
 }
