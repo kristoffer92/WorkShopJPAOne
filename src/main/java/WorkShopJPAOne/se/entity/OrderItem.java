@@ -8,18 +8,14 @@ public class OrderItem {
     private Product product;
     private ProductOrder productOrder;
 
+
     public OrderItem(int id, int quantity, Product product, ProductOrder productOrder) {
         this.id = id;
-        this.quantity = quantity;
-        this.product = product;
-        this.productOrder = productOrder;
+        setQuantity(quantity);
+        setProduct(product);
+        setProductOrder(productOrder);
     }
 
-    public int makePriceCalc()
-    {
-        int calc = product.getPrice()*quantity;
-        return calc;
-    }
 
     //Getters
     public int getId() {
@@ -63,17 +59,24 @@ public class OrderItem {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(id, quantity, product, productOrder);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("OrderItem");
+        final StringBuilder sb = new StringBuilder("OrderItem: ");
         sb.append("Id: ").append(id);
         sb.append("Quantity: ").append(quantity);
         sb.append("Product: ").append(product);
         sb.append("ProductOrder: ").append(productOrder);
         return sb.toString();
+    }
+
+    public double makePriceCalc()
+    {
+        double calc = product.getPrice()*quantity;
+        return calc;
     }
 }

@@ -10,9 +10,9 @@ public class AppUser {
 
     public AppUser(int id, String firstName, String lastName, String email) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AppUser {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("User");
+        final StringBuilder sb = new StringBuilder("User: ");
         sb.append("ID: ").append(getId()).append('\n');
         sb.append("FirstName: ").append(getFirstName()).append('\n');
         sb.append("LastName: ").append(getLastName()).append('\n');

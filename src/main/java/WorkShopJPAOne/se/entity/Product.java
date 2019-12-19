@@ -9,8 +9,8 @@ public class Product {
 
     public Product(int id, String name, int price) {
         this.id = id;
-        this.name = name;
-        this.price = price;
+        setName(name);
+        setPrice(price);
     }
 
     //Getters
@@ -37,7 +37,7 @@ public class Product {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Product");
+        final StringBuilder sb = new StringBuilder("Product: ");
         sb.append("ID: ").append(getId()).append('\n');
         sb.append("Name: ").append(getName()).append('\n');
         sb.append("Price: ").append(getPrice()).append('\n');

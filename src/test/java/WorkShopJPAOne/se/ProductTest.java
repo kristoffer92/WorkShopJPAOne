@@ -19,20 +19,6 @@ public class ProductTest {
     }
 
     @Test
-    public void makeSettersTest()
-    {
-        String name = "Test";
-        product.setName(product.getName());
-        String nameTest = product.getName();
-        assertEquals(name, nameTest);
-
-        int price = 10;
-        product.setPrice(product.getPrice());
-        int priceTest = product.getPrice();
-        assertEquals(price, priceTest);
-    }
-
-    @Test
     public void makeToStringTest()
     {
         String result = product.toString();
