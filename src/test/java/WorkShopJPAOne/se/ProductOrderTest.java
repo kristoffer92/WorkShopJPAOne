@@ -12,8 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ProductOrderTest {
@@ -82,10 +81,18 @@ public class ProductOrderTest {
     }
 
     @Test
-    public void makeAddAndRemoveTest()
+    public void makeAddTest()
     {
         productOrder.makeAdd(orderItem);
+        //assertThrows();
+    }
+
+    @Test
+    public void makeRemoveTest()
+    {
         productOrder.makeRemove(orderItem);
+       //assertThrows();
+
     }
 
     @Test

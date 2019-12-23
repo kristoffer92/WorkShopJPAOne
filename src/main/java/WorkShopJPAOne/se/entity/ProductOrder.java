@@ -81,16 +81,28 @@ public class ProductOrder {
 
 
     //Remove, Add Function
-    public OrderItem makeAdd(OrderItem orderItem)
+    public boolean makeAdd(OrderItem orderItem)
     {
-        orderItemList.add(orderItem);
-        return orderItem;
+        if(orderItem == null) throw new IllegalArgumentException("You can't send a null-value" +orderItem);
+
+        if(!orderItemList.contains(orderItem)){
+            orderItemList.add(orderItem);
+            orderItem.setProductOrder(this);
+            return true;
+        }
+        return false;
     }
 
-    public OrderItem makeRemove(OrderItem orderItem)
+    public boolean makeRemove(OrderItem orderItem)
     {
-        orderItemList.remove(orderItem);
-        return orderItem;
+        if(orderItem == null) throw new IllegalArgumentException("You can't send a null-value" +orderItem);
+
+        if(!orderItemList.contains(orderItem)) {
+            orderItemList.remove(orderItem);
+            orderItem.setProductOrder(null);
+            return true;
+        }
+        return false;
     }
 
     public double makeTotalSum()
