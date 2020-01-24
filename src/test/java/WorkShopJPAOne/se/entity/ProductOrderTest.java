@@ -1,4 +1,4 @@
-package WorkShopJPAOne.se;
+package WorkShopJPAOne.se.entity;
 
 import WorkShopJPAOne.se.entity.AppUser;
 import WorkShopJPAOne.se.entity.OrderItem;
@@ -30,15 +30,19 @@ public class ProductOrderTest {
     public void makeBeforeEachTest()
     {
         date = LocalDate.parse("2019-12-18");
-        customer = new AppUser(1,"TestFirst","TestLast","TestEmail");
+        customer = new AppUser(0,"TestFirst","TestLast","TestEmail");
+
+        testProductOne = new Product(0,"TestP",5);
+        testProductTwo = new Product(0, "TestP", 10);
+
+        orderItem = new OrderItem(0,1, testProductOne, productOrder);
+        orderItemTwo = new OrderItem(0,5, testProductTwo, productOrder);
+
+        orderItemList.add(orderItem);
+        orderItemList.add(orderItemTwo);
+
         productOrder = new ProductOrder(1,date,orderItemList,customer);
         productOrderTwo = new ProductOrder(1, date,orderItemList,customer);
-
-        testProductOne = new Product(1,"TestP",5);
-        testProductTwo = new Product(2, "TestP", 10);
-
-        orderItem = new OrderItem(1,1, testProductOne, productOrder);
-        orderItemTwo = new OrderItem(1,1, testProductOne, productOrder);
     }
 
     @AfterEach
@@ -81,26 +85,55 @@ public class ProductOrderTest {
     }
 
     @Test
-    public void makeAddTest()
+    public void makeTotalSum_QuantityTimesPriceFromProducts_Expect_55()
     {
-        productOrder.makeAdd(orderItem);
-        //assertThrows();
+        assertEquals(55, productOrder.makeTotalSum());
     }
 
+
+
+    //TestingAdd
     @Test
-    public void makeRemoveTest()
+    public void makeAdd_AddingOrderItem_ThatDoesntExist_Expect_True()
     {
         productOrder.makeRemove(orderItem);
-       //assertThrows();
-
+        assertTrue(productOrder.makeAdd(orderItem));
     }
 
     @Test
-    public void makeTotalSumTest()
+    public void makeAdd_AddingOrderItem_ThatAlreadyExists_Expect_False()
     {
+        productOrder.makeAdd(orderItem);
+        assertFalse(productOrder.makeAdd(orderItem));
+    }
 
+    @Test
+    public void makeAdd_AddingOrderItem_ThatIsNull_ThrowException()
+    {
+        assertThrows(IllegalArgumentException.class, () -> {productOrder.makeRemove(null);});
     }
 
 
+
+    //TestingRemove
+    @Test
+    public void makeRemove_RemovingOrderItem_ThatExists_Expect_True()
+    {
+        productOrder.makeAdd(orderItem);
+        assertTrue(productOrder.makeRemove(orderItem));
+    }
+
+    @Test
+    public void makeRemove_RemovingOrderItem_ThatDoesntExist_Expect_False()
+    {
+        productOrder.makeRemove(orderItem);
+        assertFalse(productOrder.makeRemove(orderItem));
+    }
+
+    @Test
+    public void makeRemove_RemovingOrderItem_ThatIsNull_ThrowException()
+    {
+        assertThrows(IllegalArgumentException.class, () -> {productOrder.makeRemove(null);});
+    }
 
 }

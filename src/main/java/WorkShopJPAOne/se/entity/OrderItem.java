@@ -1,11 +1,19 @@
 package WorkShopJPAOne.se.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class OrderItem {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int quantity;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch=FetchType.EAGER)
     private Product product;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch=FetchType.LAZY)
+    @JoinColumn(name="productOrder_id")
     private ProductOrder productOrder;
 
 
@@ -15,6 +23,8 @@ public class OrderItem {
         setProduct(product);
         setProductOrder(productOrder);
     }
+
+    public OrderItem() {}
 
 
     //Getters

@@ -1,14 +1,20 @@
 package WorkShopJPAOne.se.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class ProductOrder {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDate orderDateTime;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true, mappedBy = "productOrder")
     private List<OrderItem> orderItemList;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     private AppUser customer;
 
 
@@ -18,6 +24,8 @@ public class ProductOrder {
         setOrderItemList(orderItemList);
         setCustomer(customer);
     }
+
+    public ProductOrder() {}
 
     //Getters
     public int getId() {
@@ -97,7 +105,7 @@ public class ProductOrder {
     {
         if(orderItem == null) throw new IllegalArgumentException("You can't send a null-value" +orderItem);
 
-        if(!orderItemList.contains(orderItem)) {
+        if(orderItemList.contains(orderItem)) {
             orderItemList.remove(orderItem);
             orderItem.setProductOrder(null);
             return true;

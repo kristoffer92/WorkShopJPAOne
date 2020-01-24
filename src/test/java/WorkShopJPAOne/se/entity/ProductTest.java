@@ -1,4 +1,4 @@
-package WorkShopJPAOne.se;
+package WorkShopJPAOne.se.entity;
 
 import WorkShopJPAOne.se.entity.Product;
 import org.junit.jupiter.api.Test;
@@ -33,5 +33,13 @@ public class ProductTest {
         Product productTwo = new Product(1, "Test", 10);
         assertTrue(product.equals(productTwo));
         assertEquals(productTwo.hashCode(), product.hashCode());
+    }
+
+    @Test
+    public void makeDefaultConstructorTest()
+    {
+        Product productDefault = new Product();
+        Product productDefaultTwo = new Product();
+        assertEquals(productDefault, productDefaultTwo);
     }
 }

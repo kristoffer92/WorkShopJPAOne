@@ -1,8 +1,16 @@
 package WorkShopJPAOne.se.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class AppUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
@@ -14,6 +22,8 @@ public class AppUser {
         setLastName(lastName);
         setEmail(email);
     }
+
+    public AppUser() {}
 
     @Override
     public boolean equals(Object o) {
@@ -71,4 +81,3 @@ public class AppUser {
         this.email = email;
     }
 }
-

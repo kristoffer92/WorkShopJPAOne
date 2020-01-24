@@ -1,4 +1,4 @@
-package WorkShopJPAOne.se;
+package WorkShopJPAOne.se.entity;
 
 
 import WorkShopJPAOne.se.entity.AppUser;

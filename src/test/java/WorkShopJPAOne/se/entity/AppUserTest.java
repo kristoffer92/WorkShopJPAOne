@@ -1,4 +1,4 @@
-package WorkShopJPAOne.se;
+package WorkShopJPAOne.se.entity;
 
 import WorkShopJPAOne.se.entity.AppUser;
 import org.junit.jupiter.api.Test;
@@ -30,9 +30,19 @@ class AppUserTest {
     }
 
     @Test
-    public void makeEqualsHashCodeTest(){
+    public void makeEqualsHashCodeTest()
+    {
         AppUser appUserTwo = new AppUser(user.getId(),user.getFirstName(),user.getLastName(),user.getEmail());
         assertTrue(user.equals(appUserTwo));
         assertEquals(appUserTwo.hashCode(), user.hashCode());
     }
+
+    @Test
+    public void makeTestDefaultConst()
+    {
+        AppUser appUserDefault = new AppUser();
+        AppUser appUserDefaultTwo = new AppUser();
+        assertEquals(appUserDefault, appUserDefaultTwo);
+    }
+    
 }
