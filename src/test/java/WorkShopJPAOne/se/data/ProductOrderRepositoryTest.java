@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
@@ -33,7 +34,8 @@ public class ProductOrderRepositoryTest {
     private TestEntityManager em;
 
     @Autowired
-    public ProductOrderRepositoryTest(ProductOrderRepository productOrderRepository, TestEntityManager em) {
+    public ProductOrderRepositoryTest(ProductOrderRepository productOrderRepository, TestEntityManager em)
+    {
         this.productOrderRepository = productOrderRepository;
         this.em = em;
     }
@@ -41,10 +43,10 @@ public class ProductOrderRepositoryTest {
     @BeforeEach
     public void makeBeforeEachTest()
     {
-        customer = em.persistAndFlush(new AppUser(0,"First","Last","Email"));
+        customer = new AppUser(0,"First","Last","Email");
 
-        testProductOne = em.persistAndFlush(new Product(0,"TestP",5));
-        testProductTwo = em.persistAndFlush(new Product(0, "TestP", 5));
+        testProductOne = new Product(0,"TestP",5);
+        testProductTwo = new Product(0, "TestP", 5);
 
         //orderItemList.add(orderItem);
         //orderItemList.add(orderItemTwo);
@@ -58,6 +60,7 @@ public class ProductOrderRepositoryTest {
         productOrder.makeAdd(orderItemTwo);
 
         em.persistAndFlush(productOrder);
+
     }
 
     @Test
@@ -68,11 +71,39 @@ public class ProductOrderRepositoryTest {
     }
 
     @Test
-    public void findByName()
+    public void findByName_SuccessfullyFound()
     {
-        List<ProductOrder> pOrderListTest = new ArrayList<>();
-        pOrderListTest = productOrderRepository.findByOrderItemListProductNameContainsIgnoreCase("TestP");
-        assertTrue(pOrderListTest.contains(productOrder));
+        List<ProductOrder> productOrders = new ArrayList<>();
+        productOrders = productOrderRepository.findByOrderItemListProductNameContainsIgnoreCase("TestP");
+        assertTrue(productOrders.contains(productOrder));
     }
+
+    @Test
+    public void findByCustomerId_SuccessfullyFound()
+    {
+        List<ProductOrder> productOrders = new ArrayList<>();
+        productOrders = productOrderRepository.findByCustomerId(productOrder.getCustomer().getId());
+        assertTrue(productOrders.contains(productOrder));
+    }
+
+    @Test
+    public void findByOrderItemListProductID_SuccessfullyFound()
+    {
+        List<ProductOrder> productOrders = new ArrayList<>();
+        productOrders = productOrderRepository.findByOrderItemListProductId(testProductOne.getId());
+        assertTrue(productOrders.contains(productOrder));
+    }
+
+    @Test
+    public void findByOrderDateTimeBetween_SuccessfullyFound()
+    {
+        LocalDate startdate = LocalDate.of(2019, 11, 12);
+        LocalDate enddate = LocalDate.of(2020, 11,12);
+        List<ProductOrder> productOrders = new ArrayList<>();
+        productOrders = productOrderRepository.findByOrderDateTimeBetween(startdate, enddate);
+        assertTrue(productOrders.contains(productOrder));
+    }
+
+
 
 }

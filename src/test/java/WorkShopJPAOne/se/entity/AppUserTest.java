@@ -1,13 +1,10 @@
 package WorkShopJPAOne.se.entity;
 
-import WorkShopJPAOne.se.entity.AppUser;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
 class AppUserTest {
 
     AppUser user = new AppUser(1, "Test", "Testaren", "test@hotmail.com");
